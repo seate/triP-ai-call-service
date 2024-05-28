@@ -1,4 +1,4 @@
-package org.example.tripaicall.dto;
+package org.example.tripaicall.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Collections;

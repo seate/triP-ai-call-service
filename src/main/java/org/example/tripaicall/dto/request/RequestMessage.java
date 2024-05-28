@@ -1,4 +1,4 @@
-package org.example.tripaicall.dto;
+package org.example.tripaicall.dto.request;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
