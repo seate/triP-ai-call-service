@@ -1,13 +1,14 @@
 package org.example.tripaicall.dto.request;
 
-import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
-public class RequestMessage {
+@NoArgsConstructor
+public abstract class RequestMessage {
     private String role;
-    private List<Content> content;
 }
