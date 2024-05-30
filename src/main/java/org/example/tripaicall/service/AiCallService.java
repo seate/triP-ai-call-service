@@ -33,4 +33,9 @@ public class AiCallService {
         ChatGPTRequest request = ChatGPTRequest.createImageRequest(apiModel, maxTokens, "user", requestText, imageUrl);
         return template.postForObject(apiUrl, request, ChatGPTResponse.class);
     }
+
+    public ChatGPTResponse textAnalysis(String requestText) {
+        ChatGPTRequest request = ChatGPTRequest.createTextRequest(apiModel, maxTokens, "user", requestText);
+        return template.postForObject(apiUrl, request, ChatGPTResponse.class);
+    }
 }
