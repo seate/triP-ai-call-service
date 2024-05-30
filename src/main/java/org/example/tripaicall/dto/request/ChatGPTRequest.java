@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Collections;
 import java.util.List;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,6 +13,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ChatGPTRequest {
     @JsonProperty("model")
     private String model;
@@ -20,14 +22,22 @@ public class ChatGPTRequest {
     @JsonProperty("max_tokens")
     private int maxTokens;
 
-    public ChatGPTRequest(String model, int maxTokens, String requestText, String imageUrl) {
-        this.model = model;
-        this.maxTokens = maxTokens;
-
+    public static ChatGPTRequest createImageRequest(String model, int maxTokens, String role, String requestText, String imageUrl) {
         TextContent textContent = new TextContent("text", requestText);
         ImageContent imageContent = new ImageContent("image_url", new ImageUrl(imageUrl));
+        RequestMessage message = new ImageRequestMessage(role, List.of(textContent, imageContent));
+        return ChatGPTRequest.builder()
+                .model(model)
+                .maxTokens(maxTokens)
+                .messages(Collections.singletonList(message))
+                .build();
+    }
 
-        RequestMessage message = new RequestMessage("user", List.of(textContent, imageContent));
-        this.messages = Collections.singletonList(message);
+    public static ChatGPTRequest createTextRequest(String model, int maxTokens, String role, String requestText) {
+        return ChatGPTRequest.builder()
+                .model(model)
+                .maxTokens(maxTokens)
+                .messages(Collections.singletonList(new TextRequestMessage(role, requestText)))
+                .build();
     }
 }

@@ -17,19 +17,25 @@ public class AiCallService {
     private String apiModel;
     @Value("${openai.api.url}")
     private String apiUrl;
-    private static final Integer MAX_TOKENS = 300;
+    @Value("${openai.max.tokens}")
+    private Integer maxTokens;
 
     private final RestTemplate template;
 
     public ChatGPTResponse imageUrlAnalysis(String imageUrl, String requestText) {
-        ChatGPTRequest request = new ChatGPTRequest(apiModel, MAX_TOKENS, requestText, imageUrl);
+        ChatGPTRequest request = ChatGPTRequest.createImageRequest(apiModel, maxTokens, "user", requestText, imageUrl);
         return template.postForObject(apiUrl, request, ChatGPTResponse.class);
     }
 
     public ChatGPTResponse imageAnalysis(MultipartFile image, String requestText) throws IOException {
         String base64Image = Base64.encodeBase64String(image.getBytes());
         String imageUrl = "data:image/jpeg;base64," + base64Image;
-        ChatGPTRequest request = new ChatGPTRequest(apiModel, MAX_TOKENS, requestText, imageUrl);
+        ChatGPTRequest request = ChatGPTRequest.createImageRequest(apiModel, maxTokens, "user", requestText, imageUrl);
+        return template.postForObject(apiUrl, request, ChatGPTResponse.class);
+    }
+
+    public ChatGPTResponse textAnalysis(String requestText) {
+        ChatGPTRequest request = ChatGPTRequest.createTextRequest(apiModel, maxTokens, "user", requestText);
         return template.postForObject(apiUrl, request, ChatGPTResponse.class);
     }
 }
