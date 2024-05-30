@@ -32,4 +32,12 @@ public class ChatGPTRequest {
                 .messages(Collections.singletonList(message))
                 .build();
     }
+
+    public static ChatGPTRequest createTextRequest(String model, int maxTokens, String role, String requestText) {
+        return ChatGPTRequest.builder()
+                .model(model)
+                .maxTokens(maxTokens)
+                .messages(Collections.singletonList(new TextRequestMessage(role, requestText)))
+                .build();
+    }
 }
