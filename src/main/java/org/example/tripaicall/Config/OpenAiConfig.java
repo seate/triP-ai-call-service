@@ -1,4 +1,4 @@
-package org.example.tripaicall;
+package org.example.tripaicall.Config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
