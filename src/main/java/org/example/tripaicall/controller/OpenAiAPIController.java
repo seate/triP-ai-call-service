@@ -1,6 +1,5 @@
 package org.example.tripaicall.controller;
 
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.example.tripaicall.dto.response.ChatGPTResponse;
 import org.example.tripaicall.service.AiCallService;
@@ -9,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api")
