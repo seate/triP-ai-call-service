@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
-public class AiCallService {
+public class OpenAIService {
     @Value("${openai.model}")
     private String apiModel;
     @Value("${openai.api.url}")
