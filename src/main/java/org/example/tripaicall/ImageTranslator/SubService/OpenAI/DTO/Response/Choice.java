@@ -1,4 +1,4 @@
-package org.example.tripaicall.ImageTranslator.dto.response;
+package org.example.tripaicall.ImageTranslator.SubService.OpenAI.DTO.Response;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

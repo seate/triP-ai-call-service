@@ -1,4 +1,4 @@
-package org.example.tripaicall.ImageTranslator.dto.response;
+package org.example.tripaicall.ImageTranslator.SubService.OpenAI.DTO.Response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.List;
