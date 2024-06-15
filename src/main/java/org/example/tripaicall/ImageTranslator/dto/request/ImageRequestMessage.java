@@ -1,4 +1,4 @@
-package org.example.tripaicall.dto.request;
+package org.example.tripaicall.ImageTranslator.dto.request;
 
 import java.util.List;
 import lombok.AllArgsConstructor;

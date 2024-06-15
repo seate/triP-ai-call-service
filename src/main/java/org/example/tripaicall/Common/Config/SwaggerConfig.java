@@ -1,4 +1,4 @@
-package org.example.tripaicall.Config;
+package org.example.tripaicall.Common.Config;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;

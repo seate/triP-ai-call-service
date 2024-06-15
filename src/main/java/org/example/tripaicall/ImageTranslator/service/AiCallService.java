@@ -1,10 +1,10 @@
-package org.example.tripaicall.service;
+package org.example.tripaicall.ImageTranslator.service;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.example.tripaicall.dto.request.ChatGPTRequest;
-import org.example.tripaicall.dto.response.ChatGPTResponse;
+import org.example.tripaicall.ImageTranslator.dto.request.ChatGPTRequest;
+import org.example.tripaicall.ImageTranslator.dto.response.ChatGPTResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;

@@ -1,8 +1,8 @@
-package org.example.tripaicall.controller;
+package org.example.tripaicall.ImageTranslator.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.tripaicall.dto.response.ChatGPTResponse;
-import org.example.tripaicall.service.AiCallService;
+import org.example.tripaicall.ImageTranslator.dto.response.ChatGPTResponse;
+import org.example.tripaicall.ImageTranslator.service.AiCallService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
