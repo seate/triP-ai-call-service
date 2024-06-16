@@ -1,10 +1,10 @@
-package org.example.tripaicall.ImageTranslator.service;
+package org.example.tripaicall.ImageTranslator.SubService.OpenAI.service;
 
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.example.tripaicall.ImageTranslator.dto.request.ChatGPTRequest;
-import org.example.tripaicall.ImageTranslator.dto.response.ChatGPTResponse;
+import org.example.tripaicall.ImageTranslator.SubService.OpenAI.DTO.Request.ChatGPTRequest;
+import org.example.tripaicall.ImageTranslator.SubService.OpenAI.DTO.Response.ChatGPTResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.io.IOException;
 
 @Service
 @RequiredArgsConstructor
-public class AiCallService {
+public class OpenAIService {
     @Value("${openai.model}")
     private String apiModel;
     @Value("${openai.api.url}")
