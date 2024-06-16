@@ -2,6 +2,8 @@ package org.example.tripaicall.ImageTranslator.DTO.Response;
 
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 public class Menu {
 
@@ -11,5 +13,5 @@ public class Menu {
 
     private String description;
 
-    private String imageUrl;
+    private List<String> imageUrl;
 }

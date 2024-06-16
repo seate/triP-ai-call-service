@@ -11,7 +11,8 @@ import java.util.List;
 public class ImageTranslateResponseDTO {
 
     @Nullable
-    private String mappingFailedString;
+    private String mappingFailedOrNoForm;
 
+    @Nullable
     private List<Menu> menus;
 }

@@ -1,32 +1,26 @@
 package org.example.tripaicall.ImageTranslator.Controller;
 
 import lombok.RequiredArgsConstructor;
-import org.example.tripaicall.ImageTranslator.SubService.OpenAI.DTO.Response.ChatGPTResponse;
-import org.example.tripaicall.ImageTranslator.SubService.OpenAI.service.AiCallService;
+import org.example.tripaicall.ImageTranslator.DTO.Request.ImageTranslateRequestDTO;
+import org.example.tripaicall.ImageTranslator.DTO.Response.ImageTranslateResponseDTO;
+import org.example.tripaicall.ImageTranslator.Service.ImageTranslatorService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/image/translate")
 @RequiredArgsConstructor
-public class OpenAiAPIController {
-    private final AiCallService aiCallService;
+public class ImageTranslatorController {
 
-    @PostMapping("/imageUrl")
-    public String imageUrlAnalysis(@RequestParam String imageUrl, @RequestParam String requestText) {
-        ChatGPTResponse response = aiCallService.imageUrlAnalysis(imageUrl, requestText);
-        return response.getChoices().get(0).getMessage().getContent();
-    }
+    private final ImageTranslatorService imageTranslatorService;
 
-    @PostMapping("/image")
-    public String imageAnalysis(@RequestParam MultipartFile image, @RequestParam String requestText)
-            throws IOException {
-        ChatGPTResponse response = aiCallService.imageAnalysis(image, requestText);
-        return response.getChoices().get(0).getMessage().getContent();
+    @PostMapping
+    public ImageTranslateResponseDTO imageAnalysis(@RequestPart MultipartFile image, @RequestPart ImageTranslateRequestDTO requestDTO) throws IOException {
+        return imageTranslatorService.translateImage(image, requestDTO);
     }
 }
