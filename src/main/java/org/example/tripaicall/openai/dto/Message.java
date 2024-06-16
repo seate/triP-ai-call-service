@@ -1,4 +1,4 @@
-package org.example.tripaicall.openai.dto.request;
+package org.example.tripaicall.openai.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,6 +9,6 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class RequestMessage {
+public abstract class Message {
     private String role;
 }
