@@ -3,6 +3,7 @@ package org.example.tripaicall.openai.service;
 import jakarta.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.example.tripaicall.chatbot.model.User;
@@ -68,9 +69,13 @@ public class OpenAIService {
     }
 
     public List<Message> getMessages(String userId) {
-        return userRepository.findById(userId)
-                .map(User::getMessages)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+        Optional<User> optionalUser = userRepository.findById(userId);
+        User user = optionalUser.orElseThrow(() -> new RuntimeException("User not found"));
+        List<Message> messages = user.getMessages();
+        if(messages.size()<=1) {
+            return List.of();
+        }
+        return messages.subList(1, messages.size());
     }
 
     public ChatGPTResponse chatWithAi(String userId, String chatText) {
