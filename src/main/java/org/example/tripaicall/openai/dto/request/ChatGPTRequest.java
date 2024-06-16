@@ -28,18 +28,23 @@ public class ChatGPTRequest {
         TextContent textContent = new TextContent("text", requestText);
         ImageContent imageContent = new ImageContent("image_url", new ImageUrl(imageUrl));
         Message message = new ImageRequestMessage(role, List.of(textContent, imageContent));
-        return ChatGPTRequest.builder()
-                .model(model)
-                .maxTokens(maxTokens)
-                .messages(Collections.singletonList(message))
-                .build();
+        return createChatGPTRequest(model, maxTokens, Collections.singletonList(message));
     }
 
     public static ChatGPTRequest createTextRequest(String model, int maxTokens, String role, String requestText) {
+        Message message = new TextMessage(role, requestText);
+        return createChatGPTRequest(model, maxTokens, Collections.singletonList(message));
+    }
+
+    public static ChatGPTRequest createChatBotRequest(String model, int maxTokens, List<Message> messages) {
+        return createChatGPTRequest(model, maxTokens, messages);
+    }
+
+    private static ChatGPTRequest createChatGPTRequest(String model, int maxTokens, List<Message> messages) {
         return ChatGPTRequest.builder()
                 .model(model)
                 .maxTokens(maxTokens)
-                .messages(Collections.singletonList(new TextMessage(role, requestText)))
+                .messages(messages)
                 .build();
     }
 }
