@@ -1,4 +1,4 @@
-package org.example.tripaicall.chatbot.util;
+package org.example.tripaicall.user.util;
 
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;

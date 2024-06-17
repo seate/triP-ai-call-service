@@ -11,7 +11,7 @@ import org.example.tripaicall.imagetranslator.subservice.dto.GoogleImageSearchRe
 import org.example.tripaicall.imagetranslator.subservice.dto.Item;
 import org.example.tripaicall.imagetranslator.subservice.service.GoogleImageSearchService;
 import org.example.tripaicall.openai.dto.response.ChatGPTResponse;
-import org.example.tripaicall.openai.service.OpenAIService;
+import org.example.tripaicall.openai.service.OpenAIClientService;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,7 +28,7 @@ import java.util.stream.IntStream;
 @RequiredArgsConstructor
 public class ImageTranslatorService {
 
-    private final OpenAIService openAIService;
+    private final OpenAIClientService openAIService;
 
     private final GoogleImageSearchService googleImageSearchService;
 
@@ -40,7 +40,7 @@ public class ImageTranslatorService {
 
 
     private ImageTranslateResponseDTO translateMenuImage(MultipartFile image) throws IOException {
-        ChatGPTResponse chatGPTResponse = openAIService.imageAnalysis(image,
+        ChatGPTResponse chatGPTResponse = openAIService.requestImageAnalysis(image,
                 "이 메뉴판 이미지를 한국어로 해석하고, json 형식으로 [{“name”: “번역된 메뉴 이름”, “price”: “번역된 가격”, “description”: “너가 작성한 간단한 설명”}, ...] 형식으로 반환해줘! json으로 응답을 받아야 하니까 그 외에 다른 정보는 넣지말아줘!");
 
         String content = chatGPTResponse.getChoices().getFirst().getMessage().getContent();
@@ -81,7 +81,7 @@ public class ImageTranslatorService {
     }
 
     private ImageTranslateResponseDTO translateNoFormImage(MultipartFile image) throws IOException {
-        ChatGPTResponse chatGPTResponse = openAIService.imageAnalysis(image,
+        ChatGPTResponse chatGPTResponse = openAIService.requestImageAnalysis(image,
                 "이 이미지가 어떤 이미지인지 알려주고, 이 이미지의 글자를 한국어로 번역해줘! 번역된 글자를 반환해줘!");
         String content = chatGPTResponse.getChoices().getFirst().getMessage().getContent();
 

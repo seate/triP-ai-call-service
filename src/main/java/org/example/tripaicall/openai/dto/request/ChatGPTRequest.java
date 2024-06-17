@@ -36,7 +36,7 @@ public class ChatGPTRequest {
         return createChatGPTRequest(model, maxTokens, Collections.singletonList(message));
     }
 
-    public static ChatGPTRequest createChatBotRequest(String model, int maxTokens, List<Message> messages) {
+    public static ChatGPTRequest createMessageListRequest(String model, int maxTokens, List<Message> messages) {
         return createChatGPTRequest(model, maxTokens, messages);
     }
 
