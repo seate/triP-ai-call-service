@@ -1,15 +1,11 @@
 package org.example.tripaicall.openai.service;
 
 import jakarta.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.tomcat.util.codec.binary.Base64;
-import org.example.tripaicall.chatbot.model.User;
-import org.example.tripaicall.chatbot.repository.UserRepository;
-import org.example.tripaicall.openai.dto.Message;
-import org.example.tripaicall.openai.dto.TextMessage;
+import org.example.tripaicall.user.repository.UserRepository;
 import org.example.tripaicall.openai.dto.request.ChatGPTRequest;
 import org.example.tripaicall.openai.dto.response.ChatGPTResponse;
 import org.springframework.beans.factory.annotation.Value;
@@ -18,11 +14,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestClient;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-
 @Service
+@Getter
 @RequiredArgsConstructor
-public class OpenAIService {
+public class OpenAIClientService {
     @Value("${openai.model}")
     private String apiModel;
     @Value("${openai.api.url}")
@@ -44,25 +39,26 @@ public class OpenAIService {
                 .build();
     }
 
-    private ChatGPTResponse sendRequest(ChatGPTRequest request) {
+    public ChatGPTResponse sendRequest(ChatGPTRequest request) {
         return restClient.post()
                 .body(request)
                 .retrieve()
                 .body(ChatGPTResponse.class);
     }
 
-    public ChatGPTResponse imageUrlAnalysis(String imageUrl, String requestText) {
-        ChatGPTRequest request = ChatGPTRequest.createImageRequest(apiModel, maxTokens, "user", requestText, imageUrl);
-        return sendRequest(request);
-    }
-
-    public ChatGPTResponse imageAnalysis(MultipartFile image, String requestText) throws IOException {
+    public ChatGPTResponse requestImageAnalysis(MultipartFile image, String requestText) throws IOException {
         String base64Image = Base64.encodeBase64String(image.getBytes());
         String imageUrl = "data:image/jpeg;base64," + base64Image;
         ChatGPTRequest request = ChatGPTRequest.createImageRequest(apiModel, maxTokens, "user", requestText, imageUrl);
         return sendRequest(request);
     }
 
+    public ChatGPTResponse requestTextAnalysis(String requestText) {
+        ChatGPTRequest request = ChatGPTRequest.createTextRequest(apiModel, maxTokens, "user", requestText);
+        return sendRequest(request);
+    }
+
+/*
     public ChatGPTResponse textAnalysis(String requestText) {
         ChatGPTRequest request = ChatGPTRequest.createTextRequest(apiModel, maxTokens, "user", requestText);
         return sendRequest(request);
@@ -111,5 +107,5 @@ public class OpenAIService {
         User newUser = new User(userId, "User", messages);
         userRepository.save(newUser);
         return "ok";
-    }
+    }*/
 }
