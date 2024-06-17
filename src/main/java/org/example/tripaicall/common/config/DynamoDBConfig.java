@@ -11,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@EnableDynamoDBRepositories(basePackages = "org.example.tripaicall.chatbot.repository")
+@EnableDynamoDBRepositories(basePackages = "org.example.tripaicall.user.repository")
 public class DynamoDBConfig {
     @Value("${cloud.aws.dynamodb.endpoint}")
     private String endPoint;
