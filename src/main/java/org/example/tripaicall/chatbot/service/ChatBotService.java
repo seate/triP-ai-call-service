@@ -35,8 +35,4 @@ public class ChatBotService {
     public List<Message> getMessages(String userId) {
         return userService.getMessages(userId);
     }
-
-    public String signUp(String userId) {
-        return userService.signUp(userId);
-    }
 }
