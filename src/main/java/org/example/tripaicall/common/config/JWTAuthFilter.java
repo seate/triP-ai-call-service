@@ -14,17 +14,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.client.RestClient;
 
 public class JWTAuthFilter implements Filter {
-    @Value("${jwt.validate.url}")
-    private String validateUrl;
+    private final RestClient restClient;
 
-    private RestClient restClient;
-
-    @PostConstruct
-    private void initRestClient() {
-        this.restClient = RestClient.builder()
-                .baseUrl(validateUrl)
-                .defaultHeader("Content-Type", "application/json")
-                .build();
+    public JWTAuthFilter(RestClient restClient) {
+        this.restClient = restClient;
     }
 
     @Override
