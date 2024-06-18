@@ -56,9 +56,7 @@ public class JWTAuthFilter implements Filter {
     }
 
     private boolean validateToken(String token) {
-        String validationUrl = "https://trip-ani.kro.kr/token/validate";
         Boolean isValid = restClient.post()
-                .uri(validationUrl)
                 .body(token)
                 .retrieve()
                 .body(Boolean.class);
