@@ -1,4 +1,3 @@
-/*
 package org.example.tripaicall.common.config;
 
 import jakarta.servlet.Filter;
@@ -68,4 +67,4 @@ public class JWTAuthFilter implements Filter {
     @Override
     public void destroy() {
     }
-}*/
+}

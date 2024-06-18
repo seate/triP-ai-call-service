@@ -1,4 +1,3 @@
-/*
 package org.example.tripaicall.common.config;
 
 import java.util.Collections;
@@ -30,4 +29,3 @@ public class CorsConfig {
         return source;
     }
 }
-*/

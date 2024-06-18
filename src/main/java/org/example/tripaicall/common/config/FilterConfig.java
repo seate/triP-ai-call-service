@@ -1,4 +1,3 @@
-/*
 package org.example.tripaicall.common.config;
 
 import jakarta.annotation.PostConstruct;
@@ -45,4 +44,4 @@ public class FilterConfig {
         registrationBean.setName("JWTAuthFilter");
         return registrationBean;
     }
-}*/
+}
