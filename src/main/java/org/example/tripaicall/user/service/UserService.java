@@ -29,7 +29,7 @@ public class UserService {
     }
 
     public User init(String userId) {
-        Message initMessage = new TextMessage("system", "너는 아주 상냥하고 귀여운 말투로 답변해주는 착한 여고생이야!");
+        Message initMessage = new TextMessage("system", "너는 긴 답변이 필요 없으면 한 문장에서 두 문장으로 아주 상냥하고 귀여운 말투로 답변해주는 착한 여고생이야!");
         List<Message> messages = new ArrayList<>(List.of(initMessage));
         User newUser = new User(userId, "User", messages);
         userRepository.save(newUser);
