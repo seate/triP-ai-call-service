@@ -3,6 +3,7 @@ package org.example.tripaicall.imagetranslator.service;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.example.tripaicall.imagetranslator.dto.request.ImageTranslateRequestDTO;
 import org.example.tripaicall.imagetranslator.dto.response.ImageTranslateResponseDTO;
 import org.example.tripaicall.imagetranslator.dto.response.Menu;
@@ -24,6 +25,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.stream.IntStream;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ImageTranslatorService {
@@ -64,18 +66,18 @@ public class ImageTranslatorService {
                         GoogleImageSearchResultResponseDTO googleImageSearchResultResponseDTO = null;
                         try {
                             googleImageSearchResultResponseDTO = imageResponseFuture.get();
+                            List<String> images = googleImageSearchResultResponseDTO.getItems().stream().map(Item::getLink).toList();
+                            menu.setImageUrl(images);
                         } catch (InterruptedException | ExecutionException e) {
-                            throw new RuntimeException(e);
+                            log.error("Error while fetching image from google search", e);
                         }
-
-                        List<String> images = googleImageSearchResultResponseDTO.getItems().stream().map(Item::getLink).toList();
-                        menu.setImageUrl(images);
                     });
 
             virtualThreadPerTaskExecutor.shutdown();
 
             return imageTranslateResponseDTO;
         } catch (Exception e) {
+            log.error("Error while parsing menu image", e);
             return ImageTranslateResponseDTO.builder().mappingFailedOrNoForm(content).build();
         }
     }
