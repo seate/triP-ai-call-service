@@ -49,10 +49,18 @@ public class JWTAuthFilter implements Filter {
     }
 
     private boolean validateToken(String token) {
-        Boolean isValid = restClient.post()
-                .body(new ValidateAccessTokenRequestDTO(token))
-                .retrieve()
-                .body(Boolean.class);
+        Boolean isValid;
+        try {
+            isValid = restClient.post()
+                    .body(new ValidateAccessTokenRequestDTO(token))
+                    .retrieve()
+                    .body(Boolean.class);
+        }
+        catch (Exception e) {
+            isValid = false;
+        }
+
+
         return isValid != null && isValid;
     }
 
