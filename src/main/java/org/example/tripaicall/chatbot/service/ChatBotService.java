@@ -25,7 +25,7 @@ public class ChatBotService {
 
         ChatGPTRequest request = ChatGPTRequest.createMessageListRequest(openAIService.getApiModel(), openAIService.getMaxTokens(), recentMessages);
         ChatGPTResponse response = openAIService.sendRequest(request);
-        messageService.addMessage(messages, "bot", response.getChoices().get(0).getMessage().getContent());
+        messageService.addMessage(messages, "assistant", response.getChoices().get(0).getMessage().getContent());
 
         user.setMessages(messages);
         userService.saveUser(user);
