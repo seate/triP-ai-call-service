@@ -1,3 +1,4 @@
+/*
 package org.example.tripaicall.common.config;
 
 import jakarta.servlet.*;
@@ -35,4 +36,4 @@ public class CorsFilter implements Filter {
     @Override
     public void destroy() {
     }
-}
+}*/
