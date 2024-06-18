@@ -19,7 +19,7 @@ public class CorsFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
-        response.setHeader("Access-Control-Allow-Origin", "https://asdf-6e088.web.app/"); // 모든 도메인 허용
+        response.setHeader("Access-Control-Allow-Origin", "*"); // 모든 도메인 허용
         response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS"); // 모든 메서드 허용
         response.setHeader("Access-Control-Allow-Headers", "*");
         response.setHeader("Access-Control-Max-Age", "3600"); // 프리플라이트 요청의 캐시 시간 설정
