@@ -11,6 +11,7 @@ import org.springframework.web.client.RestClient;
 
 @Configuration
 public class FilterConfig {
+
     @Value("${jwt.validate.url}")
     private String validateUrl;
 
@@ -38,7 +39,7 @@ public class FilterConfig {
     @Order(Ordered.HIGHEST_PRECEDENCE + 1)
     public FilterRegistrationBean<JWTAuthFilter> jwtAuthFilter() {
         FilterRegistrationBean<JWTAuthFilter> registrationBean = new FilterRegistrationBean<>();
-        registrationBean.setFilter(new JWTAuthFilter(restClient));
+        registrationBean.setFilter(new JWTAuthFilter(this.restClient));
         registrationBean.addUrlPatterns("/*");
         registrationBean.setName("JWTAuthFilter");
         return registrationBean;

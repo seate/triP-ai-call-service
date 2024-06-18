@@ -1,6 +1,5 @@
 package org.example.tripaicall.common.config;
 
-import jakarta.annotation.PostConstruct;
 import jakarta.servlet.Filter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.FilterConfig;
@@ -10,10 +9,11 @@ import jakarta.servlet.ServletResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import org.springframework.beans.factory.annotation.Value;
+import org.example.tripaicall.common.dto.ValidateAccessTokenRequestDTO;
 import org.springframework.web.client.RestClient;
 
 public class JWTAuthFilter implements Filter {
+
     private final RestClient restClient;
 
     public JWTAuthFilter(RestClient restClient) {
@@ -50,7 +50,7 @@ public class JWTAuthFilter implements Filter {
 
     private boolean validateToken(String token) {
         Boolean isValid = restClient.post()
-                .body(token)
+                .body(new ValidateAccessTokenRequestDTO(token))
                 .retrieve()
                 .body(Boolean.class);
         return isValid != null && isValid;
